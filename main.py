@@ -1,16 +1,8 @@
-from github import Github
-print("Starting Automated Github-Repository-Sync")
+import requests
 
-from dotenv import load_dotenv
-import os
+response = requests.get("https://api.github.com")
 
-# Pfad zur .env Datei laden
-load_dotenv(dotenv_path=".env/.env")
-
-# Token aus der Umgebungsvariable auslesen
-token = os.getenv("github_key")
-
-git = Github(token)
-
-print(token)
-print(git)
+if response.status_code == 200:
+    print("✅ GitHub API ist erreichbar!")
+else:
+    print(f"❌ Fehler: {response.status_code}")
